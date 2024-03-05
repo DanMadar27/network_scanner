@@ -99,7 +99,7 @@ def getSysName(host): #returns the computer's name
 		x=next(g)[3][0][1]
 		return str(x)
 	except IndexError:
-		print "list index is out of range in getSysName function"
+		print("list index is out of range in getSysName function")
 		
 def getSysDescription(host): #returns description about the computer's operating system
 	g = getCmd(SnmpEngine(),CommunityData('public'),
@@ -109,7 +109,7 @@ def getSysDescription(host): #returns description about the computer's operating
 		x=next(g)[3][0][1]
 		return str(x)
 	except IndexError:
-		print "list index is out of range in getSysDescription function"
+		print("list index is out of range in getSysDescription function")
 
         
 def getSysContact(host): #returns the computer's contact name
@@ -120,7 +120,7 @@ def getSysContact(host): #returns the computer's contact name
 		x=next(g)[3][0][1]
 		return str(x)
 	except IndexError:
-		print "list index is out of range in getSysContact function"
+		print("list index is out of range in getSysContact function")
 		
 def getSysLocation(host): #the computer's location
 	g = getCmd(SnmpEngine(),CommunityData('public'),
@@ -131,7 +131,7 @@ def getSysLocation(host): #the computer's location
 		x=next(g)[3][0][1]
 		return str(x)
 	except IndexError:
-		print "list index is out of range in getSysLocation function"
+		print("list index is out of range in getSysLocation function")
 
         
 lst=[]

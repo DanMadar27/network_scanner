@@ -34,16 +34,16 @@ def get_ip_mac_routerIP_subnetMask():
     
     flag=True
     if ip=="": #if couldn't find my ip
-        print "Something wrong when getting my ip in cmdInteracting.py file"
+        print("Something wrong when getting my ip in cmdInteracting.py file")
         flag=False
     if mac=="": #if couldn't find my mac address
-        print "Something wrong when getting my mac address in cmdInteracting.py file"
+        print("Something wrong when getting my mac address in cmdInteracting.py file")
         flag=False
     if router_ip=="": #if couldn't find my router_ip
-        print "Something wrong when getting router ip in cmdInteracting.py file"
+        print("Something wrong when getting router ip in cmdInteracting.py file")
         flag=False
     if mask=="": #if couldn't find my subnet mask
-        print "Something wrong when getting mask in cmdInteracting.py file"
+        print("Something wrong when getting mask in cmdInteracting.py file")
         flag=False
         
     if flag:
@@ -146,7 +146,7 @@ def getAll_IP():
     for x in lst: 
         if x[-1]=="0" or  x[-3:]=="255": #check if ip is valid ip address
             lst.remove(x)
-    n=len(lst)/5
+    n=len(lst)//5
     new_list=[]
     for i in range(0,len(lst),n):
         new_list.append(lst[i:i+n])
@@ -163,7 +163,7 @@ def routerMacAddress2(): #get the router's mac address
     if mac!="": #if got the router's mac
         return mac
     else:
-        print "Something wrong when trying to get router ip address"
+        print("Something wrong when trying to get router ip address")
 
 my_ip,mac,router_ip,mask=get_ip_mac_routerIP_subnetMask()
 router_mac=routerMacAddress2()

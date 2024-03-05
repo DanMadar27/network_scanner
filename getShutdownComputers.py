@@ -26,7 +26,7 @@ def tree_ip_addresses(): #get ip addresses from the tree
 lst=[] # [{"ip": "1.1.1.1" , valid:True} , {"ip": "2.2.2.2" , valid:False}]
 try:
     valid_ip=tree_ip_addresses()
-    print valid_ip
+    print(valid_ip)
     for ip in valid_ip:
         dict={"ip":ip}
         if ping(ip): #if there was reply

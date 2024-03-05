@@ -15,9 +15,11 @@ class Machine:
         self.mac=mac
         self.hostname=hostname
         self.myComputer=(ip==cmdInteracting.myIP())
+        
         self.router=(ip==cmdInteracting.routerIP())
         if self.router and self.hostname=="Unknown hostname":
             self.hostname="Router"
+        
         self.isUsingSNMP=isSNMP(self.ip)
         if self.isUsingSNMP:
             self.sysUptime=getSysUpTime(self.ip)
@@ -50,7 +52,9 @@ class Machine:
 def Write_Json(manager_list): #write the list of computers to json file
     new_lst=[]
     for m in manager_list:
-        new_lst.append(m)
+        data = decode_byte_keys(m)
+        new_lst.append(data)
+
     with open(r"D:\MyFolder\Json and Pickle files\new_computers.json","w") as handle:
         json.dump(new_lst,handle)
     
@@ -136,7 +140,7 @@ def getSysLocation(host): #return the copmuter's location
 
 def divideList(lst): #divide list to equal parts
     if len(lst)>=5: # len of list is greater or equal to 5
-        n=len(lst)/5
+        n=len(lst)//5
         new_list=[]
         for i in range(0,len(lst),n):
             new_list.append(lst[i:i+n])
@@ -167,7 +171,7 @@ def pingRange2(ip_list,lst,valid_ip,process_lock,thread_lock): #pings the list o
                 process_lock.acquire()
                 valid_ip.append(ip)
                 Write_Pickle(valid_ip) #write the valid ip address to *.txt file
-                print "%s is valid"%ip
+                print("%s is valid"%ip)
                 thread_lock.release()
                 process_lock.release()                
         
@@ -234,11 +238,11 @@ def PrintTimePassed(start): #print the time passed since the "start" argument
         minutes=(timePassed/60)
         seconds=(timePassed%60)
         if seconds!=0:
-            print "took %s minutes and %s seconds"%(minutes,seconds)
+            print("took %s minutes and %s seconds"%(minutes,seconds))
         else:
-            print "took %s minutes"%(minutes)
+            print("took %s minutes"%(minutes))
     else:
-        print "took %s seconds"%(timePassed)
+        print("took %s seconds"%(timePassed))
         
 def Main(): # main
     start=time.time()
@@ -249,12 +253,24 @@ def Main(): # main
     
 if __name__=="__main__":
     while True:
-        s=raw_input(r"start scan?(y/n)"+"\n") #asks the user to start scan
+        s=input(r"start scan?(y/n)"+"\n") #asks the user to start scan
         if s=="n":
             sys.exit()
         elif s=="y":
             Main()
         else:
-            print "enter valid keyword"
+            print("enter valid keyword")
    
  
+# Decodes byte string keys in a dictionary and returns a new dictionary.
+def decode_byte_keys(data):
+  decoded_data = {}
+
+  for key, value in data.items():
+    if isinstance(value, bytes):
+      decoded_value = value.decode('utf-8')  # Adjust encoding if needed
+      decoded_data[key] = decoded_value
+    else:
+      decoded_data[key] = value
+    
+  return decoded_data
